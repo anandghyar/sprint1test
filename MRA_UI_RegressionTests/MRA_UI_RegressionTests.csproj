@@ -71,9 +71,14 @@
   <ItemGroup>
     <Compile Include="BaseScreen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\IncidentScreen.cs" />
+    <Compile Include="Screens\LogsScreen.cs" />
     <Compile Include="Screens\RouteScreen.cs" />
     <Compile Include="Screens\SideBannerScreen.cs" />
+    <Compile Include="Screens\ToolboxScreen.cs" />
+    <Compile Include="Screens\TurnoutScreen.cs" />
     <Compile Include="Tests\CanClickTheApplicationTabsTest.cs" />
+    <Compile Include="Tests\CorrectIncidentInformationIsDisplayedOnTheTurnoutScreenTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
