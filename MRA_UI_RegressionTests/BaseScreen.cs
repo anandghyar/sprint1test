@@ -1,7 +1,9 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using OpenQA.Selenium.Appium.Windows;
 using OpenQA.Selenium.Remote;
 using System;
+using System.Diagnostics;
+using System.IO;
 
 
 namespace MRA_UI_RegressionTests
