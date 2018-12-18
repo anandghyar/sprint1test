@@ -11,8 +11,24 @@ namespace MRA_UI_RegressionTests
         public const string packageFamilyName = "Mobility.IncidentResponse.UWP_9ewnw99xdqrn4!App";
         public const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723/";
         public WindowsDriver<WindowsElement> app;
-       
 
+        static BaseScreen()
+        {
+            try
+            {
+                var path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)));
+                Process myProcess;
+                myProcess = new Process();
+                myProcess = Process.Start(path + "\\TestData\\BaseTestData\\killWinAppDriver.bat");
+                myProcess.WaitForExit(2400);
+                myProcess = Process.Start(path + "\\TestData\\BaseTestData\\startWinAppDriver.bat");
+                myProcess.Close();
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("Exception occured " + e);
+            }
+        }
 
         public void LaunchApp()
         {
