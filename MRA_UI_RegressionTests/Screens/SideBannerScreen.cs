@@ -15,7 +15,6 @@ namespace MRA_UI_RegressionTests.Screens
 
         public SideBannerScreen(WindowsDriver<WindowsElement> app)
         {
-            // System.Threading.Thread.Sleep(10000);
             turnoutTab = app.FindElementByName("Turnout");
             routeTab = app.FindElementByName("Route");
             incidentTab = app.FindElementByName("Incident");

@@ -18,7 +18,7 @@ namespace MRA_UI_RegressionTests
         {
             try
             {
-                var path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)));
+                var path = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)));
                 Process myProcess;
                 myProcess = new Process();
                 myProcess = Process.Start(path + "\\TestData\\BaseTestData\\killWinAppDriver.bat");
@@ -28,7 +28,7 @@ namespace MRA_UI_RegressionTests
             }
             catch (Exception e)
             {
-                System.Console.WriteLine("Exception occured " + e);
+                Console.WriteLine("Exception occured " + e);
             }
         }
 
