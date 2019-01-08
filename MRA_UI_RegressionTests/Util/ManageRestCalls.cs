@@ -8,6 +8,12 @@ namespace MRA_UI_RegressionTests.Util
 {
     public class ManageRestCalls
     {
+        //<summary>
+        //This method will be used to replay an incident
+        //</summary>        
+        //<returns>
+        //This method returns a string
+        //</returns> 
         public string ReplayAnIncident()
         {
             string CadNumber = null;
@@ -33,7 +39,35 @@ namespace MRA_UI_RegressionTests.Util
             }
             return CadNumber;
         }
+        //<summary>
+        //This method will be used to delete replayed an incident
+        //</summary>        
+        //<returns>
+        //This method returns a string
+        //</returns> 
+        public string CancelReplayedJob(string CadNumber)
+        {
+            string statusCode = null;
+            string accessToken = GetOAuthToken();
+            try
+            {
+                RestClient client = new RestClient("https://mobilityapims01.azure-api.net/management/v1/replay/{replayedCadnumber}");
+                RestRequest request = new RestRequest(Method.DELETE);
+                request.AddUrlSegment("replayedCadnumber", CadNumber);
+                request.AddHeader("Authorization", "Bearer " + accessToken);
+                request.AddHeader("Ocp-Apim-Subscription-Key", "917c1438265b41af8a307110b7332c8a");
+                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                IRestResponse response = client.Execute(request);
+                statusCode = response.StatusCode.ToString();
 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception occured " + e);
+            }
+            return statusCode;
+        }
+        
         public string GetOAuthToken()
         {
             string oAuthToken = null;
