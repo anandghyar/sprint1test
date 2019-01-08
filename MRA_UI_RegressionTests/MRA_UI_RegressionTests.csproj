@@ -89,6 +89,8 @@
   <ItemGroup>
     <None Include="Data\App.config" />
     <None Include="packages.config" />
+    <None Include="TestData\BaseTestData\killWinAppDriver.bat" />
+    <None Include="TestData\BaseTestData\startWinAppDriver.bat" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
