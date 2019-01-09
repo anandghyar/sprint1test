@@ -87,8 +87,8 @@
     <Compile Include="Util\ManageRestCalls.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data\App.config" />
     <None Include="packages.config" />
+    <None Include="TestData\App.config" />
     <None Include="TestData\BaseTestData\killWinAppDriver.bat" />
     <None Include="TestData\BaseTestData\startWinAppDriver.bat" />
   </ItemGroup>
