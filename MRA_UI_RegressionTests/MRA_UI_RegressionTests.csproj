@@ -84,6 +84,7 @@
     <Compile Include="Screens\TurnoutScreen.cs" />
     <Compile Include="Tests\CanClickTheApplicationTabsTest.cs" />
     <Compile Include="Tests\CorrectIncidentInformationIsDisplayedOnTheTurnoutScreenTest.cs" />
+    <Compile Include="Util\DataPool.cs" />
     <Compile Include="Util\ManageRestCalls.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +92,7 @@
     <None Include="TestData\App.config" />
     <None Include="TestData\BaseTestData\killWinAppDriver.bat" />
     <None Include="TestData\BaseTestData\startWinAppDriver.bat" />
+    <None Include="TestData\EventDetails.csv" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

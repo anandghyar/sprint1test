@@ -1,5 +1,6 @@
 ﻿using MobileResponseApplicationUI.Views;
 using MRA_UI_RegressionTests;
+using MRA_UI_RegressionTests.Util;
 using NUnit.Framework;
 
 namespace MobileResponseApplicationUI.Tests
@@ -56,10 +57,11 @@ namespace MobileResponseApplicationUI.Tests
         {
             CloseApp();
         }
+
         [OneTimeTearDown]
         public void tearDown()
         {
-            extent.Flush();
+           
         }
 
         public void WhenTheCadNumberIsTheReplayedOne()
