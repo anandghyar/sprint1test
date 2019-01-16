@@ -9,11 +9,13 @@ using System.IO;
 
 namespace MRA_UI_RegressionTests
 {
-    public class BaseScreen : ManageRestCalls
+    public class BaseScreen :ManageRestCalls
     {
         public const string packageFamilyName = "Mobility.IncidentResponse.UWP_9ewnw99xdqrn4!App";
         public const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723/";
         public WindowsDriver<WindowsElement> app;
+
+        public string replayedCadnumber = ReplayAnIncident();
 
         static BaseScreen()
         {
@@ -32,19 +34,20 @@ namespace MRA_UI_RegressionTests
                 Console.WriteLine("Exception occured " + e);
             }
         }
-
+        
        
         public void LaunchApp()
         {
-            ReplayAnIncident();
+            
             var appCapabilities = new DesiredCapabilities();
             appCapabilities.SetCapability("app", packageFamilyName);
             app = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), appCapabilities);
             Assert.IsNotNull(app, "Unable to activate the app");
         }
         
-        protected void CloseApp()
+        public void CloseApp()
         {
+            CancelReplayedJob(replayedCadnumber);
             app.Quit();
         }
     }
