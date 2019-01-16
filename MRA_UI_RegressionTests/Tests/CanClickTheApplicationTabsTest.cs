@@ -16,8 +16,6 @@ namespace MRA_UI_RegressionTests.Tests
         [Test]
         public void RouteTabShouldBeClickable()
         {
-
-
             //Given the user is on the TurnoutScreen
             WhenRouteTabIsClicked();
             ThenRouteScreenIsDisplayed();

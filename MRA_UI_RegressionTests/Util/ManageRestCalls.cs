@@ -2,61 +2,76 @@
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Text;
 
 namespace MRA_UI_RegressionTests.Util
 {
     public class ManageRestCalls
     {
+
+        public static string replayUrl = ConfigurationManager.AppSettings["replayUrl"];
+        public static string replayCadNumber = ConfigurationManager.AppSettings["rimutakaIncidentCadnumber"];
+        public static string subscription = ConfigurationManager.AppSettings["Ocp-Apim-Subscription-Key"];
+        public static string appliance1 = ConfigurationManager.AppSettings["appliance1"];
+        public static string appliance2 = ConfigurationManager.AppSettings["appliance2"];
+
+
+        public static string oAuthToken
+        {
+            get { return GetOAuthToken(); }
+        }
+        
         //<summary>
         //This method will be used to replay an incident
         //</summary>        
         //<returns>
         //This method returns a string
         //</returns> 
-        public string ReplayAnIncident()
+        public static string ReplayAnIncident()
         {
-            string CadNumber = null;
-            string accessToken = GetOAuthToken();
-
+            string cadNumber = null;
             try
             {
-                RestClient client = new RestClient("https://mobilityapims01.azure-api.net/management/v1/replay/{cadNumberToBeReplayed}");
+                RestClient client = new RestClient(replayUrl + "{cadNumberToBeReplayed}");
                 RestRequest request = new RestRequest(Method.POST);
-                request.AddUrlSegment("cadNumberToBeReplayed", "F2520161");
-                request.AddHeader("Authorization", "Bearer " + accessToken);
-                request.AddHeader("Ocp-Apim-Subscription-Key", "917c1438265b41af8a307110b7332c8a");
+                request.AddUrlSegment("cadNumberToBeReplayed", replayCadNumber);
+                request.AddHeader("Authorization", "Bearer " + oAuthToken);
+                request.AddHeader("Ocp-Apim-Subscription-Key", subscription);
                 request.AddHeader("Content-Type", "application/json");
-                request.AddParameter("undefined", "{\r\n  \"appliances\": [\r\n    \"MRA001\",\"MRA002\"\r\n  ]\r\n}", ParameterType.RequestBody);
+                request.AddJsonBody(new
+                {   appliances = new List<string>() {appliance1, appliance2}
+                });
                 IRestResponse response = client.Execute(request);
                 string responseContent = response.Content;
                 var data = (JObject)JsonConvert.DeserializeObject(responseContent);
-                CadNumber = data["CadNumber"].Value<string>();
+                cadNumber = data["CadNumber"].Value<string>();
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception occured " + e);
             }
-            return CadNumber;
+            return cadNumber;
         }
+        
         //<summary>
         //This method will be used to delete replayed an incident
         //</summary>        
         //<returns>
         //This method returns a string
         //</returns> 
-        public string CancelReplayedJob(string CadNumber)
+        public static string CancelReplayedJob(string cadNumber)
         {
             string statusCode = null;
-            string accessToken = GetOAuthToken();
             try
             {
-                RestClient client = new RestClient("https://mobilityapims01.azure-api.net/management/v1/replay/{replayedCadnumber}");
+                RestClient client = new RestClient(replayUrl + "{cadNumberToBeReplayed}");
                 RestRequest request = new RestRequest(Method.DELETE);
-                request.AddUrlSegment("replayedCadnumber", CadNumber);
-                request.AddHeader("Authorization", "Bearer " + accessToken);
-                request.AddHeader("Ocp-Apim-Subscription-Key", "917c1438265b41af8a307110b7332c8a");
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                request.AddUrlSegment("replayedCadnumber", cadNumber);
+                request.AddHeader("Authorization", "Bearer " + oAuthToken);
+                request.AddHeader("Ocp-Apim-Subscription-Key", subscription);
+              //  request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 IRestResponse response = client.Execute(request);
                 statusCode = response.StatusCode.ToString();
 
@@ -67,8 +82,11 @@ namespace MRA_UI_RegressionTests.Util
             }
             return statusCode;
         }
-        
-        public string GetOAuthToken()
+
+        //<summary>
+        //This method is used to get the oAuthToken which will be used in the API call
+        //</summary>
+        public static string GetOAuthToken()
         {
             string oAuthToken = null;
             var authUrl = ConfigurationManager.AppSettings["authUrl"];
