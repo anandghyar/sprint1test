@@ -15,7 +15,6 @@ namespace MobileResponseApplicationUI.Tests
         {
             DataPool.PopulateInCollection("EventDetails.csv");
             replayedCadnumber = ManageRestCalls.ReplayAnIncident(1);
-            Thread.Sleep(50000);
         }
         [SetUp]
         public void TestInitialize()
