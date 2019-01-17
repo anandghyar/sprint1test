@@ -33,12 +33,9 @@ namespace MRA_UI_RegressionTests.Util
                     for (int i = 0; i < headers.Length; i++)
                     {
                         dr[i] = rows[i];
-                        Debug.WriteLine("dr value is " + dr[i]);
 
                     }
                     dt.Rows.Add(dr);
-                    Debug.WriteLine("dt value is " + dt);
-
                 }
 
             }

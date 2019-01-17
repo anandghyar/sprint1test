@@ -15,8 +15,6 @@ namespace MRA_UI_RegressionTests
         public const string WindowsApplicationDriverUrl = "http://127.0.0.1:4723/";
         public WindowsDriver<WindowsElement> app;
 
-        public string replayedCadnumber = ReplayAnIncident();
-
         static BaseScreen()
         {
             try
@@ -47,7 +45,6 @@ namespace MRA_UI_RegressionTests
         
         public void CloseApp()
         {
-            CancelReplayedJob(replayedCadnumber);
             app.Quit();
         }
     }

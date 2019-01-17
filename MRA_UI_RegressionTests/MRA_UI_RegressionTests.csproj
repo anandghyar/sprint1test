@@ -93,6 +93,7 @@
     <None Include="TestData\App.config" />
     <None Include="TestData\BaseTestData\killWinAppDriver.bat" />
     <None Include="TestData\BaseTestData\startWinAppDriver.bat" />
+    <None Include="TestData\Appliances.csv" />
     <None Include="TestData\EventDetails.csv" />
   </ItemGroup>
   <ItemGroup />

@@ -1,2 +1,2 @@
-Environment,CallSign,CPN,Address1,Address2,Address3,TurnoutTime,TurnoutDate1,TurnoutDate2,EventType,EventDescription,DSA,CallSourceCode,AlarmLevel,RespondingAppliance1,RespondingAppliance2
-Stg,TEST001013,RIMUTAKA RAIL TUNNEL MAYMORN PORTAL,UNKN0001 MAYMORN RD, MAYMORN, UPPER HUTT CITY,Turnout Time  13:44,Tuesday, 10 April 2018,Structure Fire,SMOKE COMING FROM TUNNEL,1m,111,1,TEST001012, TEST001013
+Environment,CallSign,CPN,Address,TurnoutTime,TurnoutDate,EventType,EventDescription,DSA,CallSourceCode,AlarmLevel,RespondingAppliance
+Stg,TEST001013,RIMUTAKA RAIL TUNNEL MAYMORN PORTAL,UNKN0001 MAYMORN RD: MAYMORN: UPPER HUTT CITY,Turnout Time  13:44,Tuesday: 10 April 2018,Structure Fire,SMOKE COMING FROM TUNNEL,1m,111,1,TEST001012: TEST001013
