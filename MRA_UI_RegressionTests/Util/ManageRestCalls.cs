@@ -12,10 +12,7 @@ namespace MRA_UI_RegressionTests.Util
     {
 
         public static string replayUrl = ConfigurationManager.AppSettings["replayUrl"];
-        public static string replayCadNumber = ConfigurationManager.AppSettings["rimutakaIncidentCadnumber"];
         public static string subscription = ConfigurationManager.AppSettings["Ocp-Apim-Subscription-Key"];
-        public static string appliance1 = ConfigurationManager.AppSettings["appliance1"];
-        public static string appliance2 = ConfigurationManager.AppSettings["appliance2"];
 
 
         public static string oAuthToken
@@ -29,11 +26,14 @@ namespace MRA_UI_RegressionTests.Util
         //<returns>
         //This method returns a string
         //</returns> 
-        public static string ReplayAnIncident()
+        public static string ReplayAnIncident(int rowNum)
         {
             string cadNumber = null;
             try
             {
+                DataPool.PopulateInCollection("Appliances.csv");
+                string appliances = DataPool.ReadData(rowNum, "Appliances").Replace(":", ",");
+                string replayCadNumber = DataPool.ReadData(rowNum, "CadNumber");
                 RestClient client = new RestClient(replayUrl + "{cadNumberToBeReplayed}");
                 RestRequest request = new RestRequest(Method.POST);
                 request.AddUrlSegment("cadNumberToBeReplayed", replayCadNumber);
@@ -41,7 +41,7 @@ namespace MRA_UI_RegressionTests.Util
                 request.AddHeader("Ocp-Apim-Subscription-Key", subscription);
                 request.AddHeader("Content-Type", "application/json");
                 request.AddJsonBody(new
-                {   appliances = new List<string>() {appliance1, appliance2}
+                {  appliances = new List<string>() {appliances}
                 });
                 IRestResponse response = client.Execute(request);
                 string responseContent = response.Content;
