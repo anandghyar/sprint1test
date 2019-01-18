@@ -40,9 +40,11 @@ namespace MRA_UI_RegressionTests.Util
                 request.AddHeader("Authorization", "Bearer " + oAuthToken);
                 request.AddHeader("Ocp-Apim-Subscription-Key", subscription);
                 request.AddHeader("Content-Type", "application/json");
-                request.AddJsonBody(new
+               /* request.AddJsonBody(new
                 {  appliances = new List<string>() {appliances}
-                });
+                });*/
+
+                request.AddParameter("undefined", "{\r\n  \"appliances\": [\r\n    "+appliances+"\r\n  ]\r\n}", ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
                 string responseContent = response.Content;
                 var data = (JObject)JsonConvert.DeserializeObject(responseContent);
