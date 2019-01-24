@@ -1,20 +1,23 @@
 ﻿using MobileResponseApplicationUI.Views;
-using MRA_UI_RegressionTests;
 using MRA_UI_RegressionTests.Util;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace MobileResponseApplicationUI.Tests
+namespace MRA_UI_RegressionTests.Tests
 {
-    [TestFixture]
-    public class CorrectIncidentInformationIsDisplayedOnTheTurnoutScreenTest : BaseScreen
+    class CorrectIncidentInfoOnTurnoutScreenForMSDAnimalHealthTest : BaseScreen
     {
         public string replayedCadnumber;
         [OneTimeSetUp]
         public void BeginExecution()
         {
             DataPool.PopulateInCollection("EventDetails.csv");
-            replayedCadnumber = ManageRestCalls.ReplayAnIncident(1);
+            replayedCadnumber = ManageRestCalls.ReplayAnIncident(2);
         }
         [SetUp]
         public void TestInitialize()
@@ -77,12 +80,12 @@ namespace MobileResponseApplicationUI.Tests
         public void ThenTheTurnOutScreenDisplaysCorrectTopBannerInfo()
         {
             var topBannerIncidentInfo = new TopBannerInfo(app);
-            string environment = DataPool.ReadData(1, "Environment");
-            string callSign = DataPool.ReadData(1, "CallSign");
-            string cpn = DataPool.ReadData(1, "CPN");
-            string address = DataPool.ReadData(1, "Address").Replace(":", ",");
+            string environment = DataPool.ReadData(2, "Environment");
+            //string callSign = DataPool.ReadData(2, "CallSign");
+            string cpn = DataPool.ReadData(2, "CPN");
+            string address = DataPool.ReadData(2, "Address").Replace(":", ",");
             Assert.That(topBannerIncidentInfo.topBannerEnvironment.Text, Is.EqualTo(environment));
-            Assert.That(topBannerIncidentInfo.topBannerCallSign.Text, Is.EqualTo(callSign));
+            //Assert.That(topBannerIncidentInfo.topBannerCallSign.Text, Is.EqualTo(callSign));
             Assert.That(topBannerIncidentInfo.topBannerCPN.Text, Is.EqualTo(cpn));
             Assert.That(topBannerIncidentInfo.topBannerAddress.Text, Is.EqualTo(address));
             Assert.IsTrue(topBannerIncidentInfo.topBannerBatteryPercentage.Displayed);
@@ -91,24 +94,27 @@ namespace MobileResponseApplicationUI.Tests
         public void ThenTurnOutScreenDisplaysCorrectEventDetails()
         {
             var turnoutScreen = new TurnoutScreen(app);
-            string turnoutTime = DataPool.ReadData(1, "TurnoutTime");
-            string turnoutDate = DataPool.ReadData(1, "TurnoutDate").Replace(":", ",");
-            string eventType = DataPool.ReadData(1, "EventType");
-            string eventDescription = DataPool.ReadData(1, "EventDescription");
+            string turnoutTime = DataPool.ReadData(2, "TurnoutTime");
+            string turnoutDate = DataPool.ReadData(2, "TurnoutDate").Replace(":", ",");
+            string eventType = DataPool.ReadData(2, "EventType");
+            string eventDescription = DataPool.ReadData(2, "EventDescription");
+            string dangerousBuildingLabel = DataPool.ReadData(2, "DangerousBuildingLabel");
             Assert.That(turnoutScreen.turnoutTime.Text, Is.EqualTo(turnoutTime));
             Assert.That(turnoutScreen.turnoutDate.Text, Is.EqualTo(turnoutDate));
             Assert.That(turnoutScreen.eventType.Text, Is.EqualTo(eventType));
             Assert.That(turnoutScreen.eventdescription.Text, Is.EqualTo(eventDescription));
+            Assert.That(turnoutScreen.dangerousBuildingLabel.Text, Is.EqualTo(dangerousBuildingLabel));
+
         }
 
         public void ThenTurnOutScreenDisplaysCorrectEventAddressDetails()
         {
             var turnoutScreen = new TurnoutScreen(app);
-            string cpn = DataPool.ReadData(1, "CPN");
-            string address = DataPool.ReadData(1, "Address").Replace(":", ",");
-            string dsa = DataPool.ReadData(1, "DSA");
-            string callSourceCode = DataPool.ReadData(1, "CallSourceCode");
-            string alarmLevel = DataPool.ReadData(1, "AlarmLevel");
+            string cpn = DataPool.ReadData(2, "CPN");
+            string address = DataPool.ReadData(2, "Address").Replace(":", ",");
+            string dsa = DataPool.ReadData(2, "DSA");
+            string callSourceCode = DataPool.ReadData(2, "CallSourceCode");
+            string alarmLevel = DataPool.ReadData(2, "AlarmLevel");
             Assert.That(turnoutScreen.turnoutCPN.Text, Is.EqualTo(cpn));
             Assert.That(turnoutScreen.turnoutFullAddress.Text, Is.EqualTo(address));
             Assert.IsTrue(turnoutScreen.turnoutLocationChange.Displayed);
@@ -120,9 +126,12 @@ namespace MobileResponseApplicationUI.Tests
         public void ThenTurnOutScreenDisplaysCorrectRespondingAppliance()
         {
             var turnoutScreen = new TurnoutScreen(app);
-            string RespondingAppliance = DataPool.ReadData(1, "RespondingAppliance").Replace(":", ",");
-            Assert.That(turnoutScreen.turnoutRespondingAppliance.Text, Is.EqualTo(RespondingAppliance));
+            string RespondingAppliance = DataPool.ReadData(2, "RespondingAppliance");
+            string[] respondingAppl = turnoutScreen.turnoutRespondingAppliance.Text.Split(',');
+            string numOfAppliances = respondingAppl.Length.ToString();
+            Assert.That(numOfAppliances, Is.EqualTo(RespondingAppliance));
         }
 
     }
 }
+

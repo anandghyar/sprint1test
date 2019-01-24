@@ -84,7 +84,8 @@
     <Compile Include="Screens\ToolboxScreen.cs" />
     <Compile Include="Screens\TurnoutScreen.cs" />
     <Compile Include="Tests\CanClickTheApplicationTabsTest.cs" />
-    <Compile Include="Tests\CorrectIncidentInformationIsDisplayedOnTheTurnoutScreenTest.cs" />
+    <Compile Include="Tests\CorrectIncidentInfoOnTurnoutScreenForMSDAnimalHealthTest.cs" />
+    <Compile Include="Tests\CorrectIncidentInformationOnTurnoutScreenForRimutakaTest.cs" />
     <Compile Include="Util\DataPool.cs" />
     <Compile Include="Util\ManageRestCalls.cs" />
   </ItemGroup>
