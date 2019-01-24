@@ -91,6 +91,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="TestData\App.config" />
+    <None Include="TestData\BaseTestData\killMobileResponseApplication.bat" />
     <None Include="TestData\BaseTestData\killWinAppDriver.bat" />
     <None Include="TestData\BaseTestData\startWinAppDriver.bat" />
     <None Include="TestData\Appliances.csv" />
