@@ -68,7 +68,7 @@ namespace MRA_UI_RegressionTests.Util
             string statusCode = null;
             try
             {
-                RestClient client = new RestClient(replayUrl + "{cadNumberToBeReplayed}");
+                RestClient client = new RestClient(replayUrl + "{replayedCadnumber}");
                 RestRequest request = new RestRequest(Method.DELETE);
                 request.AddUrlSegment("replayedCadnumber", cadNumber);
                 request.AddHeader("Authorization", "Bearer " + oAuthToken);

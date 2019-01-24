@@ -22,6 +22,7 @@ namespace MRA_UI_RegressionTests
                 var path = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)));
                 Process winAppDriver;
                 winAppDriver = new Process();
+                winAppDriver = Process.Start(path + "\\TestData\\BaseTestData\\killMobileResponseApplication.bat");
                 winAppDriver = Process.Start(path + "\\TestData\\BaseTestData\\killWinAppDriver.bat");
                 winAppDriver.WaitForExit(2400);
                 winAppDriver = Process.Start(path + "\\TestData\\BaseTestData\\startWinAppDriver.bat");
