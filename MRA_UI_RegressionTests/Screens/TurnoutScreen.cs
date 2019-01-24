@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium.Appium.Windows;
+using System;
 
 namespace MobileResponseApplicationUI.Views
 {
@@ -18,6 +19,7 @@ namespace MobileResponseApplicationUI.Views
         public WindowsElement turnoutNearestDSAValue { get; set; }
         public WindowsElement turnoutCallSourceCode { get; set; }
         public WindowsElement turnoutRespondingAppliance { get; set; }
+        public WindowsElement dangerousBuildingLabel { get; set; }
 
 
         public TurnoutScreen(WindowsDriver<WindowsElement> app)
@@ -35,6 +37,15 @@ namespace MobileResponseApplicationUI.Views
             turnoutNearestDSAValue = app.FindElementByAccessibilityId("LabelDispatchSafetyAlert");
             turnoutCallSourceCode = app.FindElementByAccessibilityId("LabelCallSourceCode");
             turnoutRespondingAppliance = app.FindElementByAccessibilityId("LabelRespondingApplianceNames");
+            try
+            {
+                dangerousBuildingLabel = app.FindElementByAccessibilityId("LabelICadDirections");
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Not Dangerous Building");
+            }
         }
     }
 
@@ -43,7 +54,7 @@ namespace MobileResponseApplicationUI.Views
     public class TopBannerInfo
     {
         public WindowsElement topBannerCPN { get; set; }
-        public WindowsElement topBannerCallSign { get; set; }
+        //public WindowsElement topBannerCallSign { get; set; }
         public WindowsElement topBannerAddress { get; set; }
         public WindowsElement topBannerBatteryPercentage { get; set; }
         public WindowsElement topBannerEnvironment { get; set; }
@@ -52,7 +63,7 @@ namespace MobileResponseApplicationUI.Views
         public TopBannerInfo(WindowsDriver<WindowsElement> app)
         {
             topBannerCPN = app.FindElementByAccessibilityId("LabelCommonPlace");
-            topBannerCallSign = app.FindElementByAccessibilityId("ButtonCallSign");
+            //topBannerCallSign = app.FindElementByAccessibilityId("ButtonCallSign");
             topBannerAddress = app.FindElementByAccessibilityId("LabelStreetAddress");
             topBannerBatteryPercentage = app.FindElementByAccessibilityId("LabelBatteryPercentage");
             topBannerEnvironment = app.FindElementByAccessibilityId("LabelEnvironment");

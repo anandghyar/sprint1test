@@ -1,2 +1,3 @@
 Environment,CPN,Address,TurnoutTime,TurnoutDate,EventType,EventDescription,DangerousBuildingLabel,DSA,CallSourceCode,AlarmLevel,RespondingAppliance
 Stg,RIMUTAKA RAIL TUNNEL MAYMORN PORTAL,UNKN0003 PARKES LINE RD: MAYMORN: UPPER HUTT CITY,Turnout Time  13:44,Tuesday: 10 April 2018,Structure Fire,SMOKE COMING FROM TUNNEL,,1m,111,1,2
+Stg,MSD ANIMAL HEALTH UPPER HUTT,33 WHAKATIKI ST: TRENTHAM: UPPER HUTT CITY,Turnout Time  08:56,Wednesday: 06 June 2018,Test Event Only,TEST,OFF FERGUSSON DR,257m,111,1,3
