@@ -1,6 +1,4 @@
-﻿using MRA_UI_RegressionTests.Util;
-using NUnit.Framework;
-using OpenQA.Selenium.Appium.Windows;
+﻿using OpenQA.Selenium.Appium.Windows;
 using System;
 
 namespace MobileResponseApplicationUI.Views
@@ -49,82 +47,11 @@ namespace MobileResponseApplicationUI.Views
                 Console.WriteLine("Not Dangerous Building");
             }
         }
-        public void WhenTheCadNumberIsTheReplayedOne(string replayedCadnumber)
-        {
-            try
-            {
-                NUnit.Framework.Assert.That(this.displayedCadNumber.Text, Is.EqualTo(replayedCadnumber));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception occured " + e);
-            }
-        }
-        public void ThenTurnOutScreenDisplaysCorrectEventDetails(int rowNum)
-        {
-            try
-            {
-                //var turnoutScreen = new TurnoutScreen(app);
-                string turnoutTime = DataPool.ReadData(rowNum, "TurnoutTime");
-                string turnoutDate = DataPool.ReadData(rowNum, "TurnoutDate").Replace(":", ",");
-                string eventType = DataPool.ReadData(rowNum, "EventType");
-                string eventDescription = DataPool.ReadData(rowNum, "EventDescription");
-                string dangerousBuildingLabel = DataPool.ReadData(rowNum, "DangerousBuildingLabel");
-                Assert.That(this.turnoutTime.Text, Is.EqualTo(turnoutTime));
-                Assert.That(this.turnoutDate.Text, Is.EqualTo(turnoutDate));
-                Assert.That(this.eventType.Text, Is.EqualTo(eventType));
-                Assert.That(this.eventdescription.Text, Is.EqualTo(eventDescription));
-                Assert.That(this.dangerousBuildingLabel.Text, Is.EqualTo(dangerousBuildingLabel));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception occured " + e);
-            }
-        }
-
-        public void ThenTurnOutScreenDisplaysCorrectEventAddressDetails(int rowNum)
-        {
-            try
-            {
-                //var turnoutScreen = new TurnoutScreen(app);
-                string cpn = DataPool.ReadData(rowNum, "CPN");
-                string address = DataPool.ReadData(rowNum, "Address").Replace(":", ",");
-                string dsa = DataPool.ReadData(rowNum, "DSA");
-                string callSourceCode = DataPool.ReadData(rowNum, "CallSourceCode");
-                string alarmLevel = DataPool.ReadData(rowNum, "AlarmLevel");
-                Assert.That(this.turnoutCPN.Text, Is.EqualTo(cpn));
-                Assert.That(this.turnoutFullAddress.Text, Is.EqualTo(address));
-                Assert.IsTrue(this.turnoutLocationChange.Displayed);
-                Assert.That(this.turnoutNearestDSAValue.Text, Is.EqualTo(dsa));
-                Assert.That(this.turnoutCallSourceCode.Text, Is.EqualTo(callSourceCode));
-                Assert.That(this.alarmLevelButton.Text, Is.EqualTo(alarmLevel));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception occured " + e);
-            }
-        }
-
-        public void ThenTurnOutScreenDisplaysCorrectRespondingAppliance(int rowNum)
-        {
-            try
-            {
-                //var turnoutScreen = new TurnoutScreen(app);
-                string RespondingAppliance = DataPool.ReadData(rowNum, "RespondingAppliance");
-                string[] respondingAppl = this.turnoutRespondingAppliance.Text.Split(',');
-                string numOfAppliances = respondingAppl.Length.ToString();
-                Assert.That(numOfAppliances, Is.EqualTo(RespondingAppliance));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception occured " + e);
-            }
-        }
     }
 
-}
 
-public class TopBannerInfo
+
+    public class TopBannerInfo
     {
         public WindowsElement topBannerCPN { get; set; }
         //public WindowsElement topBannerCallSign { get; set; }
@@ -141,27 +68,8 @@ public class TopBannerInfo
             topBannerBatteryPercentage = app.FindElementByAccessibilityId("LabelBatteryPercentage");
             topBannerEnvironment = app.FindElementByAccessibilityId("LabelEnvironment");
         }
-    public void ThenTheTurnOutScreenDisplaysCorrectTopBannerInfo(int rowNum)
-    {
-        try
-        {
-            //var topBannerIncidentInfo = new TopBannerInfo(app);
-            string environment = DataPool.ReadData(rowNum, "Environment");
-            //string callSign = DataPool.ReadData(rowNum, "CallSign");
-            string cpn = DataPool.ReadData(rowNum, "CPN");
-            string address = DataPool.ReadData(rowNum, "Address").Replace(":", ",");
-            Assert.That(this.topBannerEnvironment.Text, Is.EqualTo(environment));
-            //Assert.That(topBannerIncidentInfo.topBannerCallSign.Text, Is.EqualTo(callSign));
-            Assert.That(this.topBannerCPN.Text, Is.EqualTo(cpn));
-            Assert.That(this.topBannerAddress.Text, Is.EqualTo(address));
-            Assert.IsTrue(this.topBannerBatteryPercentage.Displayed);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine("Exception occured " + e);
-        }
-    }
 
+    }
 }
 
 
