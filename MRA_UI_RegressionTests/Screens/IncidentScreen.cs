@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium.Appium.Windows;
+using System.Threading;
 
 namespace MobileResponseApplicationUI.Views
 {
@@ -12,7 +13,7 @@ namespace MobileResponseApplicationUI.Views
 
         public IncidentScreen(WindowsDriver<WindowsElement> app)
         {
-            System.Threading.Thread.Sleep(10000);
+            Thread.Sleep(10000);
             site = app.FindElementByName("Site");
             diagrams = app.FindElementByName("Diagrams");
             contacts = app.FindElementByName("Contacts");

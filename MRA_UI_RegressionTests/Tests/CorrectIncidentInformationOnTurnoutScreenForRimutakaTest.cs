@@ -12,18 +12,18 @@ namespace MobileResponseApplicationUI.Tests
         public string replayedCadnumber;
         TurnoutScreen turnoutScreen;
         TopBannerInfo topBannerInfo;
+
         [OneTimeSetUp]
         public void BeginExecution()
         {
             DataPool.PopulateInCollection("EventDetails.csv");
-            replayedCadnumber = ManageRestCalls.ReplayAnIncident(1);
+            replayedCadnumber = ReplayAnIncident(1);
 
         }
         [SetUp]
         public void TestInitialize()
         {
             LaunchApp();
-            Thread.Sleep(70000);
             turnoutScreen = new TurnoutScreen(app);
             topBannerInfo = new TopBannerInfo(app);
         }

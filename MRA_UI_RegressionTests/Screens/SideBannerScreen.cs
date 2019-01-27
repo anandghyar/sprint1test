@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium.Appium.Windows;
-
+using System.Threading;
 
 namespace MRA_UI_RegressionTests.Screens
 {
@@ -15,7 +15,7 @@ namespace MRA_UI_RegressionTests.Screens
 
         public SideBannerScreen(WindowsDriver<WindowsElement> app)
         {
-            System.Threading.Thread.Sleep(10000);
+            Thread.Sleep(10000);
             turnoutTab = app.FindElementByName("Turnout");
             routeTab = app.FindElementByName("Route");
             incidentTab = app.FindElementByName("Incident");
