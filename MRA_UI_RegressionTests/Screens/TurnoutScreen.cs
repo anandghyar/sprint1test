@@ -1,6 +1,4 @@
-﻿using MRA_UI_RegressionTests.Util;
-using NUnit.Framework;
-using OpenQA.Selenium.Appium.Windows;
+﻿using OpenQA.Selenium.Appium.Windows;
 using System;
 using System.Threading;
 
@@ -126,7 +124,6 @@ namespace MobileResponseApplicationUI.Views
         }
     }
 
-}
 
     public class TopBannerInfo
     {
@@ -163,6 +160,7 @@ namespace MobileResponseApplicationUI.Views
         }
     }
 
+    }
 }
 
 
