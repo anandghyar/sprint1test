@@ -1,29 +1,29 @@
 ﻿using MobileResponseApplicationUI.Views;
 using MRA_UI_RegressionTests.Util;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace MRA_UI_RegressionTests.Tests
 {
     class CorrectIncidentInfoOnTurnoutScreenForMSDAnimalHealthTest : BaseScreen
     {
         public string replayedCadnumber;
+        TurnoutScreen turnoutScreen;
+        TopBannerInfo topBannerInfo;
+
         [OneTimeSetUp]
         public void BeginExecution()
         {
             DataPool.PopulateInCollection("EventDetails.csv");
-            replayedCadnumber = ManageRestCalls.ReplayAnIncident(2);
+            replayedCadnumber = ReplayAnIncident(2);
         }
+
+
         [SetUp]
         public void TestInitialize()
         {
             LaunchApp();
-            Thread.Sleep(70000);
+            turnoutScreen = new TurnoutScreen(app);
+            topBannerInfo = new TopBannerInfo(app);
         }
 
         [Test]
@@ -46,9 +46,8 @@ namespace MRA_UI_RegressionTests.Tests
         public void TurnOutScreenDisplaysCorrectEventAddressDetails()
         {
             //Given there is turnout
-            WhenTheCadNumberIsTheReplayedOne();
-            ThenTurnOutScreenDisplaysCorrectEventAddressDetails();
-
+            turnoutScreen.WhenTheCadNumberIsTheReplayedOne(replayedCadnumber);
+            turnoutScreen.ThenTurnOutScreenDisplaysCorrectEventAddressDetails(2);
         }
 
         [Test]
@@ -68,7 +67,7 @@ namespace MRA_UI_RegressionTests.Tests
         [OneTimeTearDown]
         public void tearDown()
         {
-            ManageRestCalls.CancelReplayedJob(replayedCadnumber);
+            CancelReplayedJob(replayedCadnumber);
         }
 
         public void WhenTheCadNumberIsTheReplayedOne()
@@ -134,4 +133,3 @@ namespace MRA_UI_RegressionTests.Tests
 
     }
 }
-

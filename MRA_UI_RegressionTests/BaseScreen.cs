@@ -5,7 +5,7 @@ using OpenQA.Selenium.Remote;
 using System;
 using System.Diagnostics;
 using System.IO;
-
+using System.Threading;
 
 namespace MRA_UI_RegressionTests
 {
@@ -33,7 +33,7 @@ namespace MRA_UI_RegressionTests
                 Console.WriteLine("Exception occured " + e);
             }
         }
-        
+     
        
         public void LaunchApp()
         {
@@ -42,6 +42,7 @@ namespace MRA_UI_RegressionTests
             appCapabilities.SetCapability("app", packageFamilyName);
             app = new WindowsDriver<WindowsElement>(new Uri(WindowsApplicationDriverUrl), appCapabilities);
             Assert.IsNotNull(app, "Unable to activate the app");
+            Thread.Sleep(70000);
         }
         
         public void CloseApp()
