@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium.Appium.Windows;
-using System.Threading;
 
 namespace MobileResponseApplicationUI.Views
 {
@@ -10,7 +9,7 @@ namespace MobileResponseApplicationUI.Views
 
         public ToolboxScreen(WindowsDriver<WindowsElement> app)
         {
-            Thread.Sleep(10000);
+            System.Threading.Thread.Sleep(10000);
             accuweatherIcon = app.FindElementByName("AccuWeather");
         }
     }
