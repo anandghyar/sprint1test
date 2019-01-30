@@ -31,19 +31,15 @@ namespace MRA_UI_RegressionTests.Util
             string cadNumber = null;
             try
             {
-                DataPool.PopulateInCollection("Appliances.csv");
-                string appliances = DataPool.ReadData(rowNum, "Appliances").Replace(":", ",");
-                string replayCadNumber = DataPool.ReadData(rowNum, "CadNumber");
+                Dictionary<string, string> dict = DataPool.PopulateInCollection("Appliances.csv", rowNum);
+                string appliances = dict["Appliances"].Replace(":", ",");
+                string replayCadNumber = dict["CadNumber"];
                 RestClient client = new RestClient(replayUrl + "{cadNumberToBeReplayed}");
                 RestRequest request = new RestRequest(Method.POST);
                 request.AddUrlSegment("cadNumberToBeReplayed", replayCadNumber);
                 request.AddHeader("Authorization", "Bearer " + oAuthToken);
                 request.AddHeader("Ocp-Apim-Subscription-Key", subscription);
                 request.AddHeader("Content-Type", "application/json");
-               /* request.AddJsonBody(new
-                {  appliances = new List<string>() {appliances}
-                });*/
-
                 request.AddParameter("undefined", "{\r\n  \"appliances\": [\r\n    "+appliances+"\r\n  ]\r\n}", ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
                 string responseContent = response.Content;
@@ -73,7 +69,6 @@ namespace MRA_UI_RegressionTests.Util
                 request.AddUrlSegment("replayedCadnumber", cadNumber);
                 request.AddHeader("Authorization", "Bearer " + oAuthToken);
                 request.AddHeader("Ocp-Apim-Subscription-Key", subscription);
-              //  request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
                 IRestResponse response = client.Execute(request);
                 statusCode = response.StatusCode.ToString();
 

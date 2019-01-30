@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 
 namespace MRA_UI_RegressionTests.Util
 {
@@ -41,74 +39,40 @@ namespace MRA_UI_RegressionTests.Util
             }
             return dt;
         }
-        public class DataCollection
-        {
-            public int rowNumber { get; set; }
-            public string colName { get; set; }
-            public string colValue { get; set; }
-
-        }
 
         //<summary>
-        //This method will store data in List of DataCollection
+        //This method will store data in Dictionary from DataTable
         //</summary>
         //<param name="filename">filename holds string value</param>
+        //<param name="rowNum">rowNum holds int value</param>
         //<returns>
-        //This method returns void
+        //This method returns Dictionary<string, string>
         //</returns> 
-        static List<DataCollection> dataCol = new List<DataCollection>();
-        public static void PopulateInCollection(string filename)
+        public static Dictionary<string, string> PopulateInCollection(string filename, int rowNum)
         {
+            Dictionary<string, string> dataCol = new Dictionary<string, string>();
+            string colValue;
+            string colName;
             try
             {
                 string filepath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
                 DataTable table = ConvertCSVtoDataTable(filepath + "\\TestData\\" + filename);
-                for (int row = 1; row <= table.Rows.Count; row++)
+            
+                for (int col = 0; col < table.Columns.Count; col++)
                 {
-                    for (int col = 0; col < table.Columns.Count; col++)
-                    {
-                        DataCollection dtTable = new DataCollection()
-                        {
-                            rowNumber = row,
-                            colName = table.Columns[col].ColumnName,
-                            colValue = table.Rows[row - 1][col].ToString()
-                        };
-
-                        dataCol.Add(dtTable);
-                        Debug.WriteLine("dr value is " + dataCol);
-
-                    }
+                    colName = table.Columns[col].ColumnName;
+                    colValue = table.Rows[rowNum - 1][col].ToString();
+                    dataCol.Add(colName, colValue);
                 }
+
+               
             }
             catch (Exception e)
             {
                 Console.WriteLine("Exception occured " + e);
             }
+            return dataCol;
         }
-
-        //<summary>
-        //This method will used to read data from the csv file based on Row Number and Column Name
-        //</summary>
-        //<param name="rowNumber">rowNumber holds integrer value</param>
-        //<param name="columnName">columnName holds string value</param>
-        //<returns>
-        //This method returns a string
-        //</returns>
-        public static string ReadData(int rowNumber, string columnName)
-        {
-            try
-            {
-                //Retrieving Data using LINQ
-                var data = (from colData in dataCol where colData.colName == columnName && colData.rowNumber == rowNumber select colData.colValue).SingleOrDefault().ToString();
-                return data;
-            }
-            catch (Exception e)
-            {
-                e.Message.ToString();
-                return null;
-            }
-        }
-
     }
 
 }

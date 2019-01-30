@@ -1,7 +1,7 @@
-﻿using MRA_UI_RegressionTests.Util;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium.Appium.Windows;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace MobileResponseApplicationUI.Views
@@ -63,16 +63,15 @@ namespace MobileResponseApplicationUI.Views
             }
         }
 
-        public void ThenTurnOutScreenDisplaysCorrectEventDetails(int rowNum)
+        public void ThenTurnOutScreenDisplaysCorrectEventDetails(Dictionary<string, string> dict)
         {
             try
             {
-                string turnoutTime = DataPool.ReadData(rowNum, "TurnoutTime");
-                string turnoutDate = DataPool.ReadData(rowNum, "TurnoutDate").Replace(":", ",");
-                string eventType = DataPool.ReadData(rowNum, "EventType");
-                string eventDescription = DataPool.ReadData(rowNum, "EventDescription");
-                string dangerousBuildingLabel = DataPool.ReadData(rowNum, "DangerousBuildingLabel");
-
+                string turnoutTime = dict["TurnoutTime"];
+                string turnoutDate = dict["TurnoutDate"].Replace(":", ",");
+                string eventType = dict["EventType"];
+                string eventDescription = dict["EventDescription"];
+                string dangerousBuildingLabel = dict["DangerousBuildingLabel"];
                 Assert.That(this.turnoutTime.Text, Is.EqualTo(turnoutTime));
                 Assert.That(this.turnoutDate.Text, Is.EqualTo(turnoutDate));
                 Assert.That(this.eventType.Text, Is.EqualTo(eventType));
@@ -85,17 +84,16 @@ namespace MobileResponseApplicationUI.Views
             }
         }
 
-        public void ThenTurnOutScreenDisplaysCorrectEventAddressDetails(int rowNum)
+        public void ThenTurnOutScreenDisplaysCorrectEventAddressDetails(Dictionary<string, string> dict)
         {
             try
             {
 
-                string cpn = DataPool.ReadData(rowNum, "CPN");
-                string address = DataPool.ReadData(rowNum, "Address").Replace(":", ",");
-                string dsa = DataPool.ReadData(rowNum, "DSA");
-                string callSourceCode = DataPool.ReadData(rowNum, "CallSourceCode");
-                string alarmLevel = DataPool.ReadData(rowNum, "AlarmLevel");
-
+                string cpn = dict["CPN"];
+                string address = dict["Address"].Replace(":", ",");
+                string dsa = dict["DSA"];
+                string callSourceCode = dict["CallSourceCode"];
+                string alarmLevel = dict["AlarmLevel"];
                 Assert.That(this.turnoutCPN.Text, Is.EqualTo(cpn));
                 Assert.That(this.turnoutFullAddress.Text, Is.EqualTo(address));
                 Assert.IsTrue(this.turnoutLocationChange.Displayed);
@@ -109,14 +107,14 @@ namespace MobileResponseApplicationUI.Views
             }
         }
 
-        public void ThenTurnOutScreenDisplaysCorrectRespondingAppliance(int rowNum)
+        public void ThenTurnOutScreenDisplaysCorrectRespondingAppliance(Dictionary<string, string> dict)
         {
             try
             {
-                string RespondingAppliance = DataPool.ReadData(rowNum, "RespondingAppliance");
+                string respondingAppliance = dict["RespondingAppliance"];
                 string[] respondingAppl = turnoutRespondingAppliance.Text.Split(',');
                 string numOfAppliances = respondingAppl.Length.ToString();
-                Assert.That(numOfAppliances, Is.EqualTo(RespondingAppliance));
+                Assert.That(numOfAppliances, Is.EqualTo(respondingAppliance));
             }
             catch (Exception e)
             {
@@ -143,14 +141,13 @@ public class TopBannerInfo
         topBannerEnvironment = app.FindElementByAccessibilityId("LabelEnvironment");
     }
 
-    public void ThenTheTurnOutScreenDisplaysCorrectTopBannerInfo(int rowNum)
+    public void ThenTheTurnOutScreenDisplaysCorrectTopBannerInfo(Dictionary<string, string> dict)
     {
         try
         {
-            string environment = DataPool.ReadData(rowNum, "Environment");
-            string cpn = DataPool.ReadData(rowNum, "CPN");
-            string address = DataPool.ReadData(rowNum, "Address").Replace(":", ",");
-
+            string environment = dict["Environment"];
+            string cpn = dict["CPN"];
+            string address = dict["Address"].Replace(":", ",");
             Assert.That(topBannerEnvironment.Text, Is.EqualTo(environment));
             Assert.That(topBannerCPN.Text, Is.EqualTo(cpn));
             Assert.That(topBannerAddress.Text, Is.EqualTo(address));
