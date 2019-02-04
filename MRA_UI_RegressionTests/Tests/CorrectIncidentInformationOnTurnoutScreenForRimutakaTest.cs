@@ -2,6 +2,7 @@
 using MRA_UI_RegressionTests;
 using MRA_UI_RegressionTests.Util;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace MobileResponseApplicationUI.Tests
@@ -12,11 +13,12 @@ namespace MobileResponseApplicationUI.Tests
         public string replayedCadnumber;
         TurnoutScreen turnoutScreen;
         TopBannerInfo topBannerInfo;
+        Dictionary<string, string> dict;
 
         [OneTimeSetUp]
         public void BeginExecution()
         {
-            DataPool.PopulateInCollection("EventDetails.csv");
+            dict=DataPool.PopulateInCollection("EventDetails.csv",1);
             replayedCadnumber = ReplayAnIncident(1);
 
         }
@@ -24,6 +26,7 @@ namespace MobileResponseApplicationUI.Tests
         public void TestInitialize()
         {
             LaunchApp();
+            Thread.Sleep(70000);
             turnoutScreen = new TurnoutScreen(app);
             topBannerInfo = new TopBannerInfo(app);
         }
@@ -33,7 +36,7 @@ namespace MobileResponseApplicationUI.Tests
         {
             //Given there is turnout
             turnoutScreen.WhenTheCadNumberIsTheReplayedOne(replayedCadnumber);
-            topBannerInfo.ThenTheTurnOutScreenDisplaysCorrectTopBannerInfo(1);
+            topBannerInfo.ThenTheTurnOutScreenDisplaysCorrectTopBannerInfo(dict);
         }
 
         [Test]
@@ -41,7 +44,7 @@ namespace MobileResponseApplicationUI.Tests
         {
             //Given there is turnout
             turnoutScreen.WhenTheCadNumberIsTheReplayedOne(replayedCadnumber);
-            turnoutScreen.ThenTurnOutScreenDisplaysCorrectEventDetails(1);
+            turnoutScreen.ThenTurnOutScreenDisplaysCorrectEventDetails(dict);
         }
 
         [Test]
@@ -49,7 +52,7 @@ namespace MobileResponseApplicationUI.Tests
         {
             //Given there is turnout
             turnoutScreen.WhenTheCadNumberIsTheReplayedOne(replayedCadnumber);
-            turnoutScreen.ThenTurnOutScreenDisplaysCorrectEventAddressDetails(1);
+            turnoutScreen.ThenTurnOutScreenDisplaysCorrectEventAddressDetails(dict);
 
         }
 
@@ -58,7 +61,7 @@ namespace MobileResponseApplicationUI.Tests
         {
             //Given there is turnout
             turnoutScreen.WhenTheCadNumberIsTheReplayedOne(replayedCadnumber);
-            turnoutScreen.ThenTurnOutScreenDisplaysCorrectRespondingAppliance(1);
+            turnoutScreen.ThenTurnOutScreenDisplaysCorrectRespondingAppliance(dict);
         }
 
         [TearDown]
@@ -70,7 +73,7 @@ namespace MobileResponseApplicationUI.Tests
         [OneTimeTearDown]
         public void tearDown()
         {
-            ManageRestCalls.CancelReplayedJob(replayedCadnumber);
+            CancelReplayedJob(replayedCadnumber);
         }
 
     }
