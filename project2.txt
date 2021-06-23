@@ -1,4 +1,2 @@
 alpha
-bravo
-charlie
 delta
