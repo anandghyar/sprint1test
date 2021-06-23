@@ -1,3 +1,0 @@
-SqlQuery
-select StreetAddress from Address where BuildingIdentifier = (select BuildingIdentifier from Building where SmsBuildingTypeCode='Unknown')
-
